@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_migrate import Migrate
 from .models import db, Course, User
 from .config import configs
 
@@ -13,5 +14,6 @@ def create_app(config):
     app.config.from_object(configs.get(config))
     db.init_app(app)
     register_blueprints(app)
+    Migrate(app, db)
 
     return app
