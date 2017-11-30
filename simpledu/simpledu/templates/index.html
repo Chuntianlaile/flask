@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Hello World{% endblock %}
+
+{% block body %}
+  {% for c in courses %}
+    <h1>{{ c.name }} - {{ c.author.用户名 }}</h1>
+  {% endfor %}
+{% endblock %}
