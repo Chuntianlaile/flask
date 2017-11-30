@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Hello World{% endblock %}
+
+{% block body %}
+  {% for f in files %}
+    <h2>{{ f.title }}</h2>
+  {% endfor %}
+{% endblock %}
