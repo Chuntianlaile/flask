@@ -4,7 +4,7 @@ class BaseConfig:
 class DevConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = ('mysql+mysqldb://root:aitak@localhost:3306/simpledu?charset=utf8')
+    SQLALCHEMY_DATABASE_URI = ('mysql+mysqldb://root@localhost:3306/simpledu?charset=utf8')
 
 class ProConfig(BaseConfig):
     pass
