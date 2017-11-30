@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, abort
 from simpledu.models import Course, User
+from simpledu.forms import RegisterForm, LoginForm
 
 front = Blueprint('front', __name__)
 
@@ -10,8 +11,10 @@ def index():
 
 @front.route('/login')
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    return render_template('login.html', form=form)
 
 @front.route('/register')
 def register():
-    return render_template('register.html')
+    form = RegisterForm()
+    return render_template('register.html', form=form)
