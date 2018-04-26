@@ -51,7 +51,10 @@
         </div>
       {% endfor %}
     {% endif %}
-    {% block body %}{% endblock %}
+    {% block body %}
+      <link href="http://vjs.zencdn.net/6.2.7/video-js.css" rel="stylesheet">
+      <script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
+    {% endblock %}
     {% block footer %}{% endblock %}
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

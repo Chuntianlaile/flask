@@ -11,7 +11,7 @@
     <div class='col-md-8'>
       <div class='list-group'>
         {% for i in course.chapter %}
-          <a class='list-group-item' href='#'>
+          <a class='list-group-item' href='{{ url_for("course.chapter", course_id=course.id, chapter_id=i.id) }}'>
             <span class='glyphicon glyphicon-play' aria-hidden='true'></span>
             <span>{{ i.name }} &nbsp; ({{ i.video_duration }})</span>
           </a>
