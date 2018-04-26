@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
+{% from 'macros.html' import render_pagination %}
 
 {% block title %}主页{% endblock %}
 
 {% block body %}
-  {% for c in courses %}
-    <h1>{{ c.name }} - {{ c.author.name }}</h1>
-  {% endfor %}
+  <div class='row'>
+    {% for c in pagination.items %}
+      <div class='col-sm-6 col-md-4 course'>
+        <div class='thumbnail'>
+          <a href="{{ url_for('course.detail', course_id=c.id) }}" target='_blank'>
+            <img src='{{ c.image_url }}' alt='课程'>
+            <div class='caption'>
+              <h4 class='course_name'>{{ c.name }}</h4>
+              <p class='course_description'>{{ c.description }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {{ render_pagination(pagination, 'front.index') }}
 {% endblock %}
