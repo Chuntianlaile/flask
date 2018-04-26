@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from flask import Blueprint, render_template, flash, url_for, redirect
-=======
 from flask import Blueprint, render_template, flash, url_for, redirect, request, current_app
->>>>>>> master
 from flask_login import login_user, logout_user, login_required
 from test.models import User, db, Course
 from test.forms import LoginForm, RegisterForm
@@ -11,19 +7,13 @@ front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
-<<<<<<< HEAD
-    courses = Course.query.all()
-    return render_template('index.html', courses=courses)
-=======
     page = request.args.get('page', default=1, type=int)
     pagination = Course.query.paginate(
         page=page, 
         per_page=current_app.config['INDEX_PER_PAGE'],
         error_out=False
     )
-    print(request.args)
     return render_template('index.html', pagination=pagination)
->>>>>>> master
 
 @front.route('/register', methods=['GET', 'POST'])
 def register():

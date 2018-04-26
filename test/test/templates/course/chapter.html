@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ chapter.name }}{% endblock %}
+
+{% block body %}
+  {{ super() }}
+  <video class="video-js vjs-16-9 vjs-big-play-centered" data-setup='{"fluid":true, "controls": true}'>
+    <source src="{{ chapter.video_url }}" type='video/mp4'>
+  </video>
+{% endblock %}

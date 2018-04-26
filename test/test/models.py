@@ -70,5 +70,9 @@ class Chapter(Base):
     course_id = db.Column(db.Integer, db.ForeignKey('course.id', ondelete='CASCADE'))
     course = db.relationship('Course')
 
+    @property
+    def url(self):
+        return url_for('course.chapter', course_id=course_id, chapter_id=self.id)
+
     def __repr__(self):
         return 'Chapter: {}'.format(self.name)
