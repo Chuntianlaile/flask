@@ -6,6 +6,6 @@
 {% block body %}
   <div class='form'>
     <h2>Login</h2>
-    {{ render_form(form, 'front.login') }}
+    {{ render_form(form, url_for('front.login')) }}
   </div>
 {% endblock %}

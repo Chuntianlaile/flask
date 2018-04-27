@@ -4,6 +4,7 @@ from faker import Faker
 from test.models import db, User, Course, Chapter
 
 f = Faker('zh-cn')
+# image_url='http://www.hinews.cn/pic/0/11/43/80/11438010_485243.jpg'
 
 def iter_user():
     return User(

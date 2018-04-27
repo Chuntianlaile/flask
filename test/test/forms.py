@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError
-from wtforms.validators import Length, Email, EqualTo, Required
-from .models import User, db
+from wtforms import TextAreaField, IntegerField
+from wtforms.validators import Length, Email, EqualTo, Required, URL, NumberRange
+from .models import User, db, Course
 
 class RegisterForm(FlaskForm):
     name = StringField('用户名', validators=[Required(), Length(3, 22)])
@@ -12,11 +13,11 @@ class RegisterForm(FlaskForm):
 
     def validate_name(self, f):
         if User.query.filter_by(name=f.data).first():
-            return ValidationError('用户名已存在')
+            raise ValidationError('用户名已存在')
 
     def validate_email(self, f):
         if User.query.filter_by(email=f.data).first():
-            return ValidationError('邮箱已被注册')
+            raise ValidationError('邮箱已被注册')
 
     def create_user(self):
         user = User()
@@ -32,9 +33,31 @@ class LoginForm(FlaskForm):
 
     def validate_name(self, f):
         if not User.query.filter_by(name=f.data).first():
-            return ValidationError('用户名不存在')
+            raise ValidationError('用户名不存在')
 
     def validate_password(self, f):
         user = User.query.filter_by(name=self.name.data).first()
         if user and not user.check_password(f.data):
-            return ValidationError('密码错误')
+            raise ValidationError('密码错误')
+
+class CourseForm(FlaskForm):
+    name = StringField('课程名儿', validators=[Required(), Length(6, 33)])
+    description = TextAreaField('课程简介', validators=[Required(), Length(20, 233)])
+    image_url = StringField('图片地址', validators=[Required(), URL()])
+    author_id = IntegerField('作者ID', validators=[Required(), NumberRange(min=1, message='无效的用户ID')])
+    submit = SubmitField('提交')
+
+    def validate_author_id(self, field):
+        if not User.query.get(self.author_id.data):
+            raise ValidationError('用户不存在')
+
+    def validate_name(self,f):
+        if Course.query.filter_by(name=f.data).first():
+            raise ValidationError('课程已经存在')
+
+    def create_course(self):
+        course = Course()
+        self.populate_obj(course)
+        db.session.add(course)
+        db.session.commit()
+        return course

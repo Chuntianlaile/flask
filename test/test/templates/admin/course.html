@@ -20,11 +20,11 @@
             <td>{{ course.author.name }}</td>
             <td>
               <div class='btn-group' role='group'>
-                <a href='' type='button' class='btn btn-default' title='编辑'>
-                  <span class='glyphicon glyphicon-trash' title='编辑' aria-hidden='true'></span>
+                <a href='{{ url_for("admin.edit", course_id=course.id) }}' type='button' class='btn btn-default' title='编辑'>
+                  <span class='glyphicon glyphicon-pencil' title='编辑' aria-hidden='true'></span>
                 </a>
-                <a href='' type='button' class='btn btn-default' title='删除'>
-                  <span class='glyphicon glyphicon-trash' title='编辑' aria-hidden='true'></span>
+                <a href='{{ url_for("admin.delete", course_id=course.id) }}' type='button' class='btn btn-default' title='删除'>
+                  <span class='glyphicon glyphicon-trash' title='删除' aria-hidden='true'></span>
                 </a>
               </div>
             </td>
@@ -34,4 +34,11 @@
     </thead>
   </table>
   {{ render_pagination(pagination, 'admin.course') }}
+{% endblock %}
+
+{% block operation %}
+  <a href="{{ url_for('admin.create') }}" type='button' class='btn btn-primary'>
+    <span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
+    添加课程
+  </a>
 {% endblock %}
