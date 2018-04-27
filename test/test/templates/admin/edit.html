@@ -1,0 +1,9 @@
+{% extends 'admin/index.html' %}
+{% from 'macros.html' import render_form %}
+
+{% block title %}编辑课程{% endblock %}
+
+{% block admin %}
+  <h3>编辑课程</h3>
+  {{ render_form(form, url_for('admin.edit', course_id=course.id)) }}
+{% endblock %}

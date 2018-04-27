@@ -1,5 +1,5 @@
 {% macro render_form(form, url) %}
-  <form method='post' action="{{ url_for(url) }}">
+  <form method='post' action="{{ url }}">
     {{ form.csrf_token }}
     {% for f in form %}
       {% if f.type == 'CSRFTokenField' %}
